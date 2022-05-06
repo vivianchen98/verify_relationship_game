@@ -1,0 +1,54 @@
+// traffic2_relationship_game CSG
+
+csg
+
+// 2 players
+player player1 p1 endplayer
+player player2 p2 endplayer
+
+// weight vector
+const double w1;
+const double w2;
+
+// original player costs
+const double u1_aa = 2;
+const double u1_ab = 4;
+const double u1_ba = 1.5;
+const double u1_bb = 3;
+
+const double u2_aa = 2;
+const double u2_ab = 1.5;
+const double u2_ba = 4;
+const double u2_bb = 3;
+
+
+// first player
+module p1
+	[a_1] true -> true; // route a
+	[b_1] true -> true; // route b	
+endmodule
+
+// second player constructed through renaming
+module p2 = p1[a_1=a_2,b_1=b_2] endmodule
+
+
+rewards "cost1" // cost of player 1
+	[a_1,a_2] true : u1_aa + w1 * u2_aa;
+	[a_1,b_2] true : u1_ab + w1 * u2_ab;
+	[b_1,a_2] true : u1_ba + w1 * u2_ba;
+	[b_1,b_2] true : u1_bb + w1 * u2_bb;
+endrewards
+
+rewards "cost2" // cost of player 2
+	[a_1,a_2] true : u2_aa + w2 * u1_aa;
+	[a_1,b_2] true : u2_ab + w2 * u1_ab;
+	[b_1,a_2] true : u2_ba + w2 * u1_ba;
+	[b_1,b_2] true : u2_bb + w2 * u1_bb;
+endrewards
+
+rewards "cost_total" // total cost of both players
+	[a_1,a_2] true : (u1_aa + w1 * u2_aa) + (u2_aa + w2 * u1_aa);
+	[a_1,b_2] true : (u1_ab + w1 * u2_ab) + (u2_ab + w2 * u1_ab);
+	[b_1,a_2] true : (u1_ba + w1 * u2_ba) + (u2_ba + w2 * u1_ba);
+	[b_1,b_2] true : (u1_bb + w1 * u2_bb) + (u2_bb + w2 * u1_bb);
+endmodule

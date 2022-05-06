@@ -1,0 +1,18 @@
+// maximum prob players collaborate
+<<player1>> Pmax=?[F p1 = a_1 & p2 = a_2 ]
+<<player2>> Pmax=?[F p1 = a_1 & p2 = a_2 ]
+
+// expected cost of a player
+<<player1>> R{"cost1"}min=?[F p1 = a_1 & p2 = a_2 ]
+<<player2>> R{"cost2"}min=?[F p1 = a_1 & p2 = a_2 ]
+
+//<<player2>> R{"cost_total"}min=?[F p1 = a_1 & p2 = a_2 ]
+<<player1>> R{"cost1"}/{"cost_total"} <= 0.5 [S]
+
+
+
+// p1 and p2 to maximize the probility of collaboration
+<<player1:player2>>max=? (P[ F p1=a_1] + P[F p2=a_2])
+
+// p1 and p2 collaborate to minimize the total cost
+<<player1:player2>>min=> (R{"cost1"}[F p1=a_1] + R{"cost2"}[F p2=a_2])
