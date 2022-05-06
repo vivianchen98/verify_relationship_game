@@ -1,0 +1,51 @@
+//const double prob_a_1;
+const double prob_a_2;
+
+const double w1;
+const double w2;
+
+const double u1_aa = 2;
+const double u1_ab = 4;
+const double u1_ba = 1.5;
+const double u1_bb = 3;
+
+const double u2_aa = 2;
+const double u2_ab = 1.5;
+const double u2_ba = 4;
+const double u2_bb = 3;
+
+mdp
+
+module traffic2_partial_pure
+
+	// states
+	s : [0..6] init 0;
+
+	// transitions given s_2 = (prob_a_2, 1-prob_a_2)
+	[a_1] s=0 -> (s'=1);
+	[b_1] s=0 -> (s'=4);
+	[] s=1 -> prob_a_2: (s'=2) + (1-prob_a_2): (s'=3);
+	[] s=4 -> prob_a_2: (s'=5) + (1-prob_a_2):(s'=6);
+	
+	// transitions given s_1 = (prob_a_1, 1-prob_a_1)
+	//[] s=0 -> prob_a_1:(s'=1) + (1-prob_a_1):(s'=4);
+	//[a_2] s=1 -> (s'=2);
+	//[b_2] s=1 -> (s'=3);
+	//[a_2] s=4 -> (s'=5);
+	//[b_2] s=4 -> (s'=6);
+
+endmodule
+
+rewards "cost1" // cost of player 1
+	s = 2 : u1_aa + w1 * u2_aa; // a,a
+	s = 3 : u1_ab + w1 * u2_ab; // a,b
+	s = 5 : u1_ba + w1 * u2_ba; // b,a
+	s = 6 : u1_bb + w1 * u2_bb; // b,b
+endrewards
+
+rewards "cost2" // cost of player 2
+	s = 2 : u2_aa + w2 * u1_aa;
+	s = 3 : u2_ab + w2 * u1_ab;
+	s = 5 : u2_ba + w2 * u1_ba;
+	s = 6 : u2_bb + w2 * u1_bb;
+endrewards
