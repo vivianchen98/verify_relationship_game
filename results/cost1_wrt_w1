@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE chartFormat SYSTEM "chartformat.dtd">
+<chartFormat graphTitle="cost1 with respect to w1=[0,1]" legendFontColourB="0" legendFontColourG="0" legendFontColourR="0" legendFontName="SansSerif" legendFontSize="11" legendFontStyle="0" legendPosition="right" legendVisible="true" titleFontColourB="0" titleFontColourG="0" titleFontColourR="0" titleFontName="SansSerif" titleFontSize="14" titleFontStyle="0" versionString="3.1">
+    <layout/>
+    <axis autoscale="true" heading="w1" headingFontColourB="0" headingFontColourG="0" headingFontColourR="0" headingFontName="SansSerif" headingFontSize="12" headingFontStyle="0" logBase="10.0" logStyle="1" logarithmic="false" majorColourB="204" majorColourG="204" majorColourR="204" majorGridInterval="0.2" maxValue="1.0" maximumPower="1.0" minValue="0.0" minimumPower="0.0" numberFontColourB="0" numberFontColourG="0" numberFontColourR="0" numberFontName="SansSerif" numberFontSize="12" numberFontStyle="0" showMajor="true"/>
+    <axis autoscale="true" heading="player 1 cost" headingFontColourB="0" headingFontColourG="0" headingFontColourR="0" headingFontName="SansSerif" headingFontSize="12" headingFontStyle="0" logBase="10.0" logStyle="1" logarithmic="false" majorColourB="204" majorColourG="204" majorColourR="204" majorGridInterval="0.2" maxValue="1.0" maximumPower="1.0" minValue="0.0" minimumPower="0.0" numberFontColourB="0" numberFontColourG="0" numberFontColourR="0" numberFontName="SansSerif" numberFontSize="12" numberFontStyle="0" showMajor="true"/>
+    <graph lineStyle="normal" lineWidth="1.0" seriesColourB="255" seriesColourG="0" seriesColourR="0" seriesHeading="(A,A)" seriesShape="circle" showLines="true" showPoints="true">
+        <point x="0.0" y="2.0"/>
+        <point x="0.1" y="2.2"/>
+        <point x="0.2" y="2.4"/>
+        <point x="0.30000000000000004" y="2.6"/>
+        <point x="0.4" y="2.8"/>
+        <point x="0.5" y="3.0"/>
+        <point x="0.6000000000000001" y="3.2"/>
+        <point x="0.7000000000000001" y="3.4000000000000004"/>
+        <point x="0.8" y="3.6"/>
+        <point x="0.9" y="3.8"/>
+        <point x="1.0" y="4.0"/>
+    </graph>
+    <graph lineStyle="normal" lineWidth="1.0" seriesColourB="0" seriesColourG="0" seriesColourR="255" seriesHeading="(A,B)" seriesShape="triangle" showLines="true" showPoints="true">
+        <point x="0.0" y="4.0"/>
+        <point x="0.1" y="4.15"/>
+        <point x="0.2" y="4.3"/>
+        <point x="0.30000000000000004" y="4.45"/>
+        <point x="0.4" y="4.6"/>
+        <point x="0.5" y="4.75"/>
+        <point x="0.6000000000000001" y="4.9"/>
+        <point x="0.7000000000000001" y="5.05"/>
+        <point x="0.8" y="5.2"/>
+        <point x="0.9" y="5.35"/>
+        <point x="1.0" y="5.5"/>
+    </graph>
+    <graph lineStyle="normal" lineWidth="1.0" seriesColourB="0" seriesColourG="127" seriesColourR="0" seriesHeading="(B,A)" seriesShape="square" showLines="true" showPoints="true">
+        <point x="0.0" y="1.5"/>
+        <point x="0.1" y="1.9"/>
+        <point x="0.2" y="2.3"/>
+        <point x="0.30000000000000004" y="2.7"/>
+        <point x="0.4" y="3.1"/>
+        <point x="0.5" y="3.5"/>
+        <point x="0.6000000000000001" y="3.9000000000000004"/>
+        <point x="0.7000000000000001" y="4.300000000000001"/>
+        <point x="0.8" y="4.7"/>
+        <point x="0.9" y="5.1"/>
+        <point x="1.0" y="5.5"/>
+    </graph>
+    <graph lineStyle="normal" lineWidth="1.0" seriesColourB="191" seriesColourG="191" seriesColourR="0" seriesHeading="(B,B)" seriesShape="rectangle_h" showLines="true" showPoints="true">
+        <point x="0.0" y="3.0"/>
+        <point x="0.1" y="3.3"/>
+        <point x="0.2" y="3.6"/>
+        <point x="0.30000000000000004" y="3.9000000000000004"/>
+        <point x="0.4" y="4.2"/>
+        <point x="0.5" y="4.5"/>
+        <point x="0.6000000000000001" y="4.800000000000001"/>
+        <point x="0.7000000000000001" y="5.1"/>
+        <point x="0.8" y="5.4"/>
+        <point x="0.9" y="5.7"/>
+        <point x="1.0" y="6.0"/>
+    </graph>
+</chartFormat>

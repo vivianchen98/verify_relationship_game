@@ -1,10 +1,8 @@
-// traffic2_relationship_game CSG
+smg
 
-csg
-
-// 2 players
-player player1 p1 endplayer
-player player2 p2 endplayer
+player sched scheduler endplayer
+player ag1 agent1, [fin1] endplayer
+player ag2 agent2, [fin2] endplayer
 
 // weight vector
 const double w1;
@@ -21,34 +19,50 @@ const double u2_ab = 1.5;
 const double u2_ba = 4;
 const double u2_bb = 3;
 
+const turn1=1; 
+const turn2=2;
 
-// first player
-module p1
-	[a_1] true -> true; // route a
-	[b_1] true -> true; // route b	
+module scheduler
+	turn : [0..2] init 0;
+	outcome : [0..1] init 0;
+
+	[] turn=0 & s1=0 -> (turn'=1);
+	[] turn=0 & s2=0 -> (turn'=2);
+
+	
+	[fin1] true -> (turn'=0);
+	[fin2] true -> (turn'=0);
+
+
+	[] s1>0 & s2>0 & outcome=0 -> (outcome'=1);  // agents 1 and 2 chosen
+	[] outcome>0 -> (turn'=2);
+
 endmodule
 
-// second player constructed through renaming
-module p2 = p1[a_1=a_2,b_1=b_2] endmodule
+module agent1
+	s1 : [0..2]; // 1 - route A (cooperate), 2 - route B (defect)
+	[fin1] turn=turn1 & s1=0 -> (s1'=1);
+	[fin1] turn=turn1 & s1=0 -> (s1'=2);
+endmodule
+
+module agent2=agent1[s1=s2,turn1=turn2,fin1=fin2] endmodule
+
+
+formula target = outcome>0 & turn!=0;
+formula AA = (s1=1&s2=1);
+formula AB = (s1=1&s2=2);
+formula BA = (s1=2&s2=1);
+formula BB = (s1=2&s2=2);
 
 
 rewards "cost1" // cost of player 1
-	[a_1,a_2] true : u1_aa + w1 * u2_aa;
-	[a_1,b_2] true : u1_ab + w1 * u2_ab;
-	[b_1,a_2] true : u1_ba + w1 * u2_ba;
-	[b_1,b_2] true : u1_bb + w1 * u2_bb;
+	outcome=1 : (s1=1&s2=1) ?  (u1_aa + w1 * u2_aa) : ((s1=1&s2=2) ? (u1_ab + w1 * u2_ab) : ((s1=2&s2=1) ? (u1_ba + w1 * u2_ba) : ((s1=2&s2=2) ? (u1_bb + w1 * u2_bb) : 0)));
 endrewards
 
 rewards "cost2" // cost of player 2
-	[a_1,a_2] true : u2_aa + w2 * u1_aa;
-	[a_1,b_2] true : u2_ab + w2 * u1_ab;
-	[b_1,a_2] true : u2_ba + w2 * u1_ba;
-	[b_1,b_2] true : u2_bb + w2 * u1_bb;
+	outcome=1 : (s1=1&s2=1) ?  (u2_aa + w2 * u1_aa) : ((s1=1&s2=2) ? (u2_ab + w2 * u1_ab) : ((s1=2&s2=1) ? (u2_ba + w2 * u1_ba) : ((s1=2&s2=2) ? (u2_bb + w2 * u1_bb) : 0)));
 endrewards
 
-rewards "cost_total" // total cost of both players
-	[a_1,a_2] true : (u1_aa + w1 * u2_aa) + (u2_aa + w2 * u1_aa);
-	[a_1,b_2] true : (u1_ab + w1 * u2_ab) + (u2_ab + w2 * u1_ab);
-	[b_1,a_2] true : (u1_ba + w1 * u2_ba) + (u2_ba + w2 * u1_ba);
-	[b_1,b_2] true : (u1_bb + w1 * u2_bb) + (u2_bb + w2 * u1_bb);
-endmodule
+rewards "total_cost"
+	outcome=1 : (s1=1&s2=1) ?  (u1_aa + w1 * u2_aa + u2_aa + w2 * u1_aa) : ((s1=1&s2=2) ? (u1_ab + w1 * u2_ab + u2_ab + w2 * u1_ab) : ((s1=2&s2=1) ? (u1_ba + w1 * u2_ba + u2_ba + w2 * u1_ba) : ((s1=2&s2=2) ? (u1_bb + w1 * u2_bb + u2_bb + w2 * u1_bb) : 0)));
+endrewards
